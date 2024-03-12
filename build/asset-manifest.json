@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.efa12e59.css",
+    "main.js": "/static/js/main.75cadb66.js",
+    "static/js/787.5ecc5826.chunk.js": "/static/js/787.5ecc5826.chunk.js",
+    "static/media/dp-img3.jpg": "/static/media/dp-img3.1d32250abac91f7f9ea2.jpg",
+    "static/media/plate.png": "/static/media/plate.78aa09fd85052339a3c7.png",
+    "static/media/dp-img2.jpg": "/static/media/dp-img2.f3456a720c050f63107b.jpg",
+    "static/media/blog1.png": "/static/media/blog1.561d1b2cf65600075946.png",
+    "static/media/blog2.png": "/static/media/blog2.90eafa15b323baaa4a78.png",
+    "static/media/ad1.png": "/static/media/ad1.6473b3d2019dc72c5b2b.png",
+    "static/media/ad2.png": "/static/media/ad2.7b442c957c66f6f5fda9.png",
+    "static/media/ad5.png": "/static/media/ad5.542c4c03409acce8c5b0.png",
+    "static/media/Frame.png": "/static/media/Frame.63eb5b7edc38e8228e89.png",
+    "static/media/brand1.png": "/static/media/brand1.63eb5b7edc38e8228e89.png",
+    "static/media/flowerkolly.png": "/static/media/flowerkolly.1bfe9cb24524e4a750ed.png",
+    "static/media/ad4.png": "/static/media/ad4.bed7aafc0e139a7a6a61.png",
+    "static/media/ad3.png": "/static/media/ad3.fa63801e31bf930cf1ca.png",
+    "static/media/dp-img1.png": "/static/media/dp-img1.47e271c7d21021ee3399.png",
+    "static/media/tomatos.webp": "/static/media/tomatos.69db659ddecc89972aed.webp",
+    "static/media/orange-slice.png": "/static/media/orange-slice.a9c937a234c538f11c6e.png",
+    "static/media/brand5.png": "/static/media/brand5.ae7e964bdb1c9519ef99.png",
+    "static/media/cherry.png": "/static/media/cherry.811c87a50b1b86ac8b1c.png",
+    "static/media/call icon.svg": "/static/media/call icon.7e189784baf7fb2d1e6bf1b5b7db08d0.svg",
+    "index.html": "/index.html",
+    "main.efa12e59.css.map": "/static/css/main.efa12e59.css.map",
+    "main.75cadb66.js.map": "/static/js/main.75cadb66.js.map",
+    "787.5ecc5826.chunk.js.map": "/static/js/787.5ecc5826.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.efa12e59.css",
+    "static/js/main.75cadb66.js"
+  ]
+}
