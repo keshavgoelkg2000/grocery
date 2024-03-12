@@ -10,7 +10,7 @@
 .hoverIncrease {
     padding: 20px;
     text-align: center;
-    display: grid;
+    display: inline-block;
     justify-content: center;
     transition-duration: .3s;
 }
