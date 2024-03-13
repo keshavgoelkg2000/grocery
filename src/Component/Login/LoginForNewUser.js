@@ -1,150 +1,248 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TfiAlarmClock } from "react-icons/tfi";
 import { GiSurferVan } from "react-icons/gi";
 import Header from "../Header/Header";
-// import FaFolderOpen from 'react-icons/lib/fa/folder-open';
-// import FaFileCodeO from 'react-icons/lib/fa/file-code-o';
 import Footer from "../Footer/Footer";
 import { MdOutlineFastfood } from "react-icons/md";
 import { MdDeliveryDining } from "react-icons/md";
 import "./LoginForNewUser.css";
 import LoginLeftComponent from "./LoginLeftComponent";
+import { signUp } from "../../apis/user-service";
+import { Button, Container, FormFeedback, FormGroup } from "reactstrap";
+import { Route, Routes, redirect, useNavigate } from "react-router";
+import Home from "../Home/Home";
+import { ToastContainer, Bounce, toast } from 'react-toastify';
 
 const LoginForNewUser = () => {
+
+    const navigate = useNavigate();
+
+    // getting and setting data from the form
+    const [data, setData] = useState({
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone_number: '',
+        password: '',
+        address: '',
+        state: '',
+        city: '',
+        pincode: ''
+    })
+
+    // handling errors
+    const [error, setError] = useState({
+        errors: {},
+        isError: false
+    })
+
+    // useEffect is running to display the changes
+    // useEffect(() => {
+    //     console.log(data);
+    // }, [data])
+
+    // handle change is basically used to access form
+    const handleChange = (event, props) => {
+        console.log("changing");
+        // dynamically setting the values
+        setData({ ...data, [props]: event.target.value });
+
+        /*
+        This is also the way but used only for single values one value is setting in all the field values
+        setData({...data, last_name: event.target.value});
+        setData({...data, email: event.target.value});
+        setData({...data, phone_number: event.target.value});
+        setData({...data, password: event.target.value});
+        setData({...data, address: event.target.value});
+        setData({...data, state: event.target.value});
+        setData({...data, city: event.target.value});
+        setData({...data, pincode: event.target.value});
+        */
+    }
+
+    // resetting form
+    const resetData = () => {
+        <ToastContainer position="top-center" />
+
+        setData({
+            first_name: '',
+            last_name: '',
+            email: '',
+            phone_number: '',
+            password: '',
+            address: '',
+            state: '',
+            city: '',
+            pincode: ''
+        })
+    }
+
+    // submit the form
+    const submitForm = (event) => {
+        event.preventDefault() // stopping the default actions on submitting form
+        console.log(data);
+
+        if(error.isError == true){
+            toast.error("Form data is invalid !!");
+            return;
+        }
+
+        // data validate
+
+        // call server api for sending data
+        signUp(data).then((resp) => {
+            console.log(resp);
+            console.log("success");
+
+            toast.success('You have successfully registered !!', {position: "top-center"});
+            setData({
+                first_name: '',
+                last_name: '',
+                email: '',
+                phone_number: '',
+                password: '',
+                address: '',
+                state: '',
+                city: '',
+                pincode: ''
+            })
+            navigate('/'); // Redirect to the home page
+
+        }).catch((err) => {
+            console.log(err);
+            console.log("error");
+
+            setError({
+                errors: error,
+                isError: true
+            })
+        });
+    };
+    
+    <Routes>
+        <Route path="/" element={<Home/>} />
+    </Routes>
+
     return (
         <div className="" style={{ display: "flex", padding: "5% 10%", height: "50%" }}>
-            <LoginLeftComponent/>
+            <LoginLeftComponent />
 
-            <div className="" style={{backgroundColor: "black", color: "white", width: "46%",borderRadius: "0% 10% 10% 0%"}}>
+            <div className="" style={{ backgroundColor: "black", color: "white", width: "46%", borderRadius: "0% 10% 10% 0%" }}>
                 <div style={{ padding: "5% 7%", fontSize: "30px" }}>
                     <h2><b>Register</b></h2>
                 </div>
 
-                <form style={{paddingLeft: "4%"}}>
-                    <div class="form-row" style={{display: "flex"}}>
-                        <div class="form-group col-md-6" >
-                            <label for="firstName">FirstName</label>
-                            <input type="text" class="form-control" id="firstName" style={{width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} 
-                                placeholder="Enter first name" required/>
-                        </div>
+                <form onSubmit={submitForm} style={{ paddingLeft: "4%" }}>
+                    <div class="form-row" style={{ display: "flex" }}>
 
-                        <div class="form-group col-md-6" >
-                            <label for="lastName">LastName</label>
-                            <input type="text" class="form-control" id="lastName" style={{width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} 
-                                placeholder="Enter last name"/>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group" style={{paddingTop: "6px"}}>
-                        <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" style={{width: "95%", padding: "0px 10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} placeholder="abc@gmail.com"/>
-                    </div>
-                    
-                    <div class="form-group" style={{paddingTop: "6px"}}>
-                        <label for="inputPhoneNumber">Phone Number</label>
-                        <input type="number" class="form-control" id="inputPhoneNumber" style={{width: "95%", padding: "0px 10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} placeholder="Enter phone number"/>
-                    </div>
-                    
-                    <div class="form-group" style={{paddingTop: "6px"}}>
-                        <label for="inputPassword">Password</label>
-                        <input type="password" class="form-control" id="inputPassword" style={{width: "95%", padding: "0px 10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} placeholder="Enter password"/>
-                    </div>
-                    
-                    <div class="form-group" style={{paddingTop: "6px"}}>
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" style={{width: "95%", padding: "0px 10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} placeholder="1234 Main St"/>
+                        <FormGroup>
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" style={{ width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                                onChange={(e) => handleChange(e, 'first_name')}
+                                id="first_name"
+                                placeholder="Enter first name"
+                                value={data.first_name}
+                                required
+                                // onInvalid={ error.errors?.response?.data?.first_name ? true : false }
+                            />
+
+                            {/* <FormFeedback>
+                                {error.errors?.response?.data?.first_name}
+                            </FormFeedback> */}
+                        </FormGroup>
+
+                        <FormGroup>
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" style={{ width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                                id="last_name"
+                                onChange={(e) => handleChange(e, 'last_name')}
+                                placeholder="Enter last name"
+                                value={data.last_name}
+                            />
+                        </FormGroup>
                     </div>
 
-                    <div class="form-row" style={{display: "flex", paddingTop: "8px"}}>
-                        <div class="form-group col-md-4">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" style={{width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} id="inputCity" placeholder="Gurgaon"/>
-                        </div>
+                    <FormGroup>
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" style={{ width: "95%", padding: "0px 10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                            onChange={(e) => handleChange(e, 'email')}
+                            id="email"
+                            value={data.email}
+                            required
+                            placeholder="abc@gmail.com" />
+                    </FormGroup>
 
-                        <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <input type="text" class="form-control" style={{width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} id="inputState" placeholder="Haryana"/>
-                        </div>
+                    <FormGroup>
+                        <label for="phone_number">Phone Number</label>
+                        <input type="number" class="form-control" style={{ width: "95%", padding: "0px 10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                            id="phone_number"
+                            onChange={(e) => handleChange(e, 'phone_number')}
+                            value={data.phone_number}
+                             required
+                            placeholder="Enter phone number" />
+                    </FormGroup>
 
-                        <div class="form-group col-md-4">
-                            <label for="inputZip">Pincode</label>
-                            <input type="text" class="form-control" style={{width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh",borderRadius: "8px", border: "1px solid white", borderColor: "white"}} id="inputZip" placeholder="122001" />
-                        </div>
+                    <FormGroup>
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" style={{ width: "95%", padding: "0px 10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                            id="password"
+                            required
+                            onChange={(e) => handleChange(e, 'password')}
+                            value={data.password}
+                            placeholder="Enter password" />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" style={{ width: "95%", padding: "0px 10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                            id="address"
+                            onChange={(e) => handleChange(e, 'address')}
+                            value={data.address}
+                            placeholder="1234 Main St" />
+                    </FormGroup>
+
+                    <div class="form-row" style={{ display: "flex" }}>
+                        <FormGroup>
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" style={{ width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                                value={data.city}
+                                id="city"
+                                onChange={(e) => handleChange(e, 'city')}
+                                placeholder="Gurgaon" />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" style={{ width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                                value={data.state}
+                                id="state"
+                                onChange={(e) => handleChange(e, 'state')}
+                                placeholder="Haryana" />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <label for="pincode">Pincode</label>
+                            <input type="text" class="form-control" style={{ width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white", borderColor: "white" }}
+                                // value={data.pincode}
+                                onChange={(e) => handleChange(e, 'pincode')}
+                                id="pincode"
+                                placeholder="122001" />
+                        </FormGroup>
                     </div>
 
-                    <div class="form-group" style={{padding: "6px 0px"}}>
+                    <FormGroup>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck" required/>
+                            <input class="form-check-input" type="checkbox" id="gridCheck" required />
                             <label class="form-check-label" for="gridCheck">
                                 Accepting all terms & conditions
                             </label>
                         </div>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" style={{fontSize: "13px", margin: "15px 0px", padding: "2px 0px", borderRadius: "8px", width: "20%", backgroundColor: "#0404d7", color: "white"}}>
-                        Submit
-                    </button>
-                    </form>
-                
+                    </FormGroup>
 
-{/* 
-                <form style={{
-                    paddingLeft: "4%"
-                }}>
-                    <div class="form-row">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="First name" />
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Last name" />
-                        </div>
-                    </div>
-
-                    <div class="form-group" style={{
-                        textAlign: "center", width: "70%", marginLeft: "2.5%", marginTop: "3%"
-                    }}>
-                        
-
-                        <input type="text" class="form-control" id="exampleInputEmail1" style={{
-                            width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh",
-                            borderRadius: "8px", border: "1px solid white", borderColor: "white"
-                        }}
-                            aria-describedby="emailHelp"
-                            placeholder="Enter "
-                        />
-
-                        <div className="innerOR" style={{
-                            margin: "2% 0%"
-                        }}>
-                            <h2 style={{
-                                fontSize: "10px"
-                            }}>Or</h2>
-                        </div>
-
-                        <input type="text" class="form-control" id="exampleInputEmail1" style={{ width: "90%", padding: "10px", color: "black", fontSize: "12px", height: "4vh", borderRadius: "8px", border: "1px solid white" }} aria-describedby="emailHelp" placeholder="Enter Password" />
-                        {/* <div>
-                            <a href="#" style={{ textAlign: "right", fontSize: "10px", color: "cornflowerblue", textDecoration: "none" }}>Forgot Password?</a>
-                        </div> */}
-
-{/* 
-                    </div>
-                    <button type="submit" class="btn btn-primary"
-                        style={{
-                            color: "rgb(141, 127, 127)", backgroundColor: "#551717",
-                            marginTop: "6%", marginLeft: "6%", width: "62%", borderRadius: "8px"
-                        }}
-                    ><b>Continue</b></button>
-                    <div class="form-check" style={{ width: "70%", paddingLeft: "5.5%", paddingTop: "1%", display: "flex", paddingBottom: "5%" }}> */}
-                        {/* <div>
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                        </div> */}
-                        {/* <div style={{ fontSize: "10px", padding: "4px" }}>
-                            <label class="form-check-label" for="exampleCheck1">By continuing, I accept TCP - TrueBazaar's Terms and Conditions & Privacy Policy
-                                This site is protected by reCAPTCHA and the Google - Privacy Policy and & Terms of Service apply.</label>
-                        </div>
-                    </div>
-                </form> */}
-                 
+                    <Container className="left" style={{marginBottom: "4%"}}>
+                        <Button color="primary" size="sm">Submit</Button>{' '}
+                    </Container>
+                </form>
             </div>
         </div>
     );

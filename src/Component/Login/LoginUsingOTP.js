@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import { MdOutlineFastfood } from "react-icons/md";
 import { MdDeliveryDining } from "react-icons/md";
 import LoginLeftComponent from "./LoginLeftComponent";
+import LoginHeader from "../LoginHeader";
 
 const LoginForExistingUser = () => {
     return (
@@ -16,10 +17,7 @@ const LoginForExistingUser = () => {
             <LoginLeftComponent/>
 
             <div className="" style={{backgroundColor: "black", color: "white", width: "38%",borderRadius: "0% 10% 10% 0%"}}>
-                <div style={{ padding: "7%", fontSize: "30px" }}>
-                    <h2><b>Login</b></h2>
-                    <p style={{ fontSize: "small" }}><b>using OTP</b></p>
-                </div>
+                <LoginHeader heading={"Login"} p={"using OTP"} />
 
                 <form style={{paddingLeft: "4%"}}>
                     <div class="form-group" style={{textAlign: "center", width: "70%", marginLeft: "2.5%", marginTop: "3%"}}>
