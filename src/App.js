@@ -10,6 +10,8 @@ import LoginUsingPassword from './Component/Login/LoginUsingPassword';
 import { BrowserRouter as Router, Link , Route, Routes  } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Container } from 'reactstrap';
+import LUOVerify from './Component/Login/LUOVerify';
+import PaytmHome from './Component/PaymentIntegration/PaytmHome';
 
 function App() {
 
@@ -29,6 +31,8 @@ function App() {
             <Route path='/loginUsingPassword' Component={LoginUsingPassword} />
             <Route path='/LoginUsingOTP' Component={LoginUsingOTP} />
             <Route path='/register' Component={LoginForNewUser} />
+            <Route path='/LUOVerify' Component={LUOVerify} />
+            <Route path='/PaytmHome' Component={PaytmHome} />
         </Routes>
       </Router>
     </div>

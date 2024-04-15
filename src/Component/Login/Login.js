@@ -16,7 +16,7 @@ import LoginLeftComponent from "./LoginLeftComponent";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import LoginUsingPassword from './LoginUsingPassword';
 import LoginUsingOTP from './LoginUsingOTP';
-import LoginHeader from "../LoginHeader";
+import LoginHeader from "./LoginHeader";
 
 
 const Login = () => {

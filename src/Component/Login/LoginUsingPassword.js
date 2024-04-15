@@ -11,7 +11,7 @@ import LoginForExistingUser from "./LoginUsingOTP";
 import LoginForNewUser from "./LoginForNewUser";
 import LoginLeftComponent from "./LoginLeftComponent";
 import { Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
-import LoginHeader from "../LoginHeader";
+import LoginHeader from "./LoginHeader";
 import base_url from './../../apis/bootapi';
 import axios from "axios";
 import { signUp } from "../../apis/user-service";
