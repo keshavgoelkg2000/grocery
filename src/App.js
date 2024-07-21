@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Link , Route, Routes  } from 'react-router-dom
 import { ToastContainer } from 'react-toastify';
 import { Container } from 'reactstrap';
 import LUOVerify from './Component/Login/LUOVerify';
-import PaytmHome from './Component/PaymentIntegration/PaytmHome';
+import PaymentHome from './Component/PaymentIntegration/PaymentHome';
 
 function App() {
 
@@ -32,7 +32,7 @@ function App() {
             <Route path='/LoginUsingOTP' Component={LoginUsingOTP} />
             <Route path='/register' Component={LoginForNewUser} />
             <Route path='/LUOVerify' Component={LUOVerify} />
-            <Route path='/PaytmHome' Component={PaytmHome} />
+            <Route path='/PaymentHome' Component={PaymentHome} />
         </Routes>
       </Router>
     </div>

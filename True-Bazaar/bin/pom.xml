@@ -52,14 +52,6 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>4.0.1</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.razorpay/razorpay-java -->
-		<dependency>
-		    <groupId>com.razorpay</groupId>
-		    <artifactId>razorpay-java</artifactId>
-		    <version>1.4.6</version>
-		</dependency>
-
 
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/com.springsource.javax.xml.bind -->
 		<dependency>

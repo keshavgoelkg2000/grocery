@@ -40,3 +40,12 @@ export const verifyOTP = (otp) => {
             throw error; // Rethrow the error to be handled by the caller
         });
 }
+
+export const createOrder = (data) => {
+    return MyAxios.post('/user/create_order', data)
+    .then((response) => response.data)
+    .catch((error) => {
+        console.log('Error in creating order id');
+        throw error;
+    })
+}

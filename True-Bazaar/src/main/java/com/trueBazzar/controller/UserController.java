@@ -3,15 +3,19 @@ package com.trueBazzar.controller;
 import com.trueBazzar.entity.User;
 import com.trueBazzar.repo.UserRepo;
 import com.trueBazzar.service.UserService;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.razorpay.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -56,6 +60,26 @@ public class UserController {
         return new ResponseEntity<>(user1, HttpStatus.OK);
     }
 
-
+    // create order for payment
+    @PostMapping("/create_order")
+    public ResponseEntity<String> createOrder(@RequestBody Map<String, Object> data) throws Exception {
+    	System.out.println(data);
+    	int amount = Integer.parseInt(data.get("user_amount").toString());
+    	System.out.println("amount: " + amount);
+    	
+    	var client = new RazorpayClient("rzp_test_MnvxtQeZjwMCUu", "X5IU1qfYtYdnwXEaZi9LO4Hf");
+    	
+    	JSONObject json = new JSONObject();
+    	json.put("amount", amount*100);
+    	json.put("currency", "INR");
+    	json.put("receipt", "tnx_23143");
+    	
+//    	creating new order
+    	
+    	Order order = client.orders.create(json);
+    	System.out.println(order);
+    	
+    	return new ResponseEntity<>(order.toString(), HttpStatus.OK);
+    }
 
 }
